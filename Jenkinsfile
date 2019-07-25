@@ -38,12 +38,13 @@ pipeline {
                     dir('.') {
                         sh 'echo "Analysis stage"'
                         sh "mvn clean test checkstyleMain findbugsMain"
+                        
                     }
                       post {
     success {
       junit resultPath
-      recordIssues tool: checkStyle(pattern: checkstyleReport)
-      recordIssues tool: findBugs(pattern: findbugsReport)
+            recordIssues enabledForFailure: true, tool: checkStyle()
+            recordIssues enabledForFailure: true, tool: spotBugs()
                 }
             }
         }

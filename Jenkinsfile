@@ -37,7 +37,7 @@ pipeline {
                 script {
                     dir('.') {
                         sh 'echo "Analysis stage"'
-                        sh "./gradlew clean test checkstyleMain findbugsMain"
+                        sh "mvn clean test checkstyleMain findbugsMain"
                     }
                       post {
     success {

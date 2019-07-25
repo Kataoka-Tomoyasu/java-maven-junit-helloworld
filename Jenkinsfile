@@ -31,19 +31,19 @@ pipeline {
           environment {
     resultPath = "TEST.xml"
     checkstyleReport = "checkstyle.xml"
-    spotbugsReport = "spotbugs.xml"
+    findbugsReport = "findbugs.xml"
              }
             steps {
                 script {
                     dir('.') {
                         sh 'echo "Analysis stage"'
-                        sh "./gradlew clean test checkstyleMain spotbugsMain"
+                        sh "./gradlew clean test checkstyleMain findbugsMain"
                     }
                       post {
     success {
       junit resultPath
       recordIssues tool: checkStyle(pattern: checkstyleReport)
-      recordIssues tool: spotBugs(pattern: spotbugsReport)
+      recordIssues tool: findBugs(pattern: findbugsReport)
                 }
             }
         }

@@ -36,6 +36,23 @@ pipeline {
                 }
             }
         }
+        stage('ビルドの準備、テスト') {
+  environment {
+    resultPath = "TEST.xml"
+    checkstyleReport = "checkstyle.xml"
+    spotbugsReport = "spotbugs.xml"
+  }
+  steps {
+    sh "./gradlew clean test checkstyleMain spotbugsMain"
+  }
+  post {
+    success {
+      junit resultPath
+      recordIssues tool: checkStyle(pattern: checkstyleReport)
+      recordIssues tool: spotBugs(pattern: spotbugsReport)
+    }
+  }
+}
     }
 
 }

@@ -28,31 +28,27 @@ pipeline {
             }
         }
         stage('Analysis') {
+          environment {
+    resultPath = "TEST.xml"
+    checkstyleReport = "checkstyle.xml"
+    spotbugsReport = "spotbugs.xml"
+             }
             steps {
                 script {
                     dir('.') {
                         sh 'echo "Analysis stage"'
+                        sh "./gradlew clean test checkstyleMain spotbugsMain"
                     }
-                }
-            }
-        }
-        stage('ビルドの準備、テスト') {
-  environment {
-    resultPath = "TEST.xml"
-    checkstyleReport = "checkstyle.xml"
-    spotbugsReport = "spotbugs.xml"
-  }
-  steps {
-    sh "./gradlew clean test checkstyleMain spotbugsMain"
-  }
-  post {
+                      post {
     success {
       junit resultPath
       recordIssues tool: checkStyle(pattern: checkstyleReport)
       recordIssues tool: spotBugs(pattern: spotbugsReport)
+                }
+            }
+        }
+
     }
   }
 }
     }
-
-}

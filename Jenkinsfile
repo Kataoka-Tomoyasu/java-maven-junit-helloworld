@@ -22,34 +22,13 @@ pipeline {
                     dir('.') {
                         sh 'set HTTP_PROXY=$HTTP_PROXY'
                         sh 'set HTTPS_PROXY=$HTTP_PROXY'
-                        sh 'mvn clean package site'
+                        sh 'clean package site'
+                        checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
                     }
                 }
             }
         }
-        stage('Analysis') {
-          environment {
-    resultPath = "TEST.xml"
-    checkstyleReport = "checkstyle.xml"
-    findbugsReport = "findbugs.xml"
-             }
-            steps {
-                script {
-                    dir('.') {
-                        sh 'echo "Analysis stage"'
-                        sh "mvn clean test checkstyleMain findbugsMain"
-                        
-                    }
-                      post {
-    success {
-      junit resultPath
-            recordIssues enabledForFailure: true, tool: checkStyle()
-            recordIssues enabledForFailure: true, tool: spotBugs()
-                }
-            }
-        }
+    }
 
-    }
-  }
 }
-    }

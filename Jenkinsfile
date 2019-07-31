@@ -23,11 +23,14 @@ pipeline {
                         sh 'set HTTP_PROXY=$HTTP_PROXY'
                         sh 'set HTTPS_PROXY=$HTTP_PROXY'
                         sh 'clean package site'
-                        checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
                     }
                 }
             }
+        }
+        stage('analysis'){
+                        checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
+        
         }
     }
 

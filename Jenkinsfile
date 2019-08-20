@@ -32,6 +32,8 @@ pipeline {
                 script {
                     dir('.') {
                         sh 'echo "Analysis stage"'
+                        checkstyle canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+          findbugs canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
                     }
                 }
             }

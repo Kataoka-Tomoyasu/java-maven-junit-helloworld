@@ -27,11 +27,5 @@ pipeline {
                 }
             }
         }
-        stage('analysis'){
-                        checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
-        
-        }
     }
-
 }

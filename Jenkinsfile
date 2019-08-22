@@ -36,7 +36,7 @@ pipeline {
                         findbugs canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
                         recordIssues(tools: [acuCobol()])
                         stepcounter settings: [[encoding: 'utf-8', filePattern: 'src/main/', filePatternExclude: '', key: 'main'], [encoding: 'utf-8', filePattern: 'src/test/', filePatternExclude: '', key: 'test']]
-                        publishCoverage adapters: [coberturaAdapter('')], sourceFileResolver: sourceFiles('NEVER_STORE')
+                        publishCoverage sourceFileResolver: sourceFiles('NEVER_STORE')
                     }
                 }
             }

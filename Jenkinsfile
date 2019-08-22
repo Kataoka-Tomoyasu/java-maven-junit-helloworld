@@ -35,7 +35,7 @@ pipeline {
                         checkstyle canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
                         findbugs canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
                         recordIssues(tools: [acuCobol()])
-                        stepcounter outputFile: '', outputFormat: 'excel', settings: [[encoding: 'utf-8', filePattern: 'src/main/', filePatternExclude: '', key: 'main'], [encoding: 'utf-8', filePattern: 'src/test', filePatternExclude: '', key: 'test']]
+                        stepcounter settings: [[encoding: 'utf-8', filePattern: 'src/main/', filePatternExclude: '', key: 'main'], [encoding: 'utf-8', filePattern: 'src/test/', filePatternExclude: '', key: 'test']]
                     }
                 }
             }

@@ -37,6 +37,7 @@ pipeline {
                         recordIssues(tools: [acuCobol()])
                         stepcounter settings: [[encoding: 'utf-8', filePattern: 'src/main/', filePatternExclude: '', key: 'main'], [encoding: 'utf-8', filePattern: 'src/test/', filePatternExclude: '', key: 'test']]
                         publishCoverage sourceFileResolver: sourceFiles('NEVER_STORE')
+                        jacoco()
                     }
                 }
             }
